@@ -29,6 +29,17 @@ class _ContactDetailsState extends State<ContactDetails> {
       ],
     );
 
+    var shortestSide = MediaQuery.of(context).size.width;
+
+    //change 600 to 820 to test on Ipad and change orientation to see the different modes trigger
+    if (shortestSide < 820) {
+      return Scaffold(
+          appBar: AppBar(
+            title: Text('Contact Details'),
+          ),
+          body: Center(child: content));
+    }
+
     return Center(child: content);
   }
 }

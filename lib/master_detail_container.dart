@@ -18,15 +18,17 @@ class _MasterDetailContainerState extends State<MasterDetailContainer> {
         elevation: 0,
         title: Text("Mobile Mode"),
       ),
-      body: ContactList(
-        itemSelectedCallback: (contact) {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ContactDetails(
-                        contact: contact,
-                      )));
-        },
+      body: Center(
+        child: ContactList(
+          itemSelectedCallback: (contact) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ContactDetails(
+                          contact: contact,
+                        )));
+          },
+        ),
       ),
     );
   }
@@ -66,13 +68,11 @@ class _MasterDetailContainerState extends State<MasterDetailContainer> {
 
   @override
   Widget build(BuildContext context) {
-    ////regardless of the orientation, it will always look for the shortest side of the device
+    ////regardless of the orientation, below code will always look for the shortest side of the device
     //var shortestSide = MediaQuery.of(context).size.shortestSide;
-
-    ///usee mobile layout if shortest side is smaller than 600
     // var useMobileLayout = shortestSide < 600;
 
-    //////the commented code below will look for the shortest width whether landscape or portrait
+    //////will look for the shortest width in relation to the orientation of the device
     var shortestSide = MediaQuery.of(context).size.width;
 
     //change 600 to 820 to test on Ipad and change orientation to see the different modes trigger
