@@ -1,12 +1,8 @@
-// import 'package:meta/meta.dart';
-
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 
 class Contact {
-  Contact({
-    @required this.title,
-    @required this.subtitle,
-  });
+  Contact({@required this.title, @required this.subtitle});
 
   final String title;
   final String subtitle;

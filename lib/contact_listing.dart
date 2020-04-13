@@ -1,39 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:tablet/contact.dart';
-import 'package:tablet/contactDetails.dart';
+//import 'package:tablet/contactDetails.dart';
 
-class ContactScreen extends StatelessWidget {
+class ContactList extends StatelessWidget {
   final ValueChanged<Contact> itemSelectedCallback;
 
-  ContactScreen({@required this.itemSelectedCallback});
+  ContactList({@required this.itemSelectedCallback});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Adaptive List"),
-      ),
-      body: ListView(
-        children: contacts.map(
-          (contact) {
-            return ListTile(
-              title: Text(
-                contact.title,
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              subtitle: Text(contact.subtitle),
-              onTap: () => itemSelectedCallback(contact),
-              // onTap: () {
-              //   print("ListTile ${contact.title} tapped");
-              //   Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //           builder: (_) => ContactDetails(contact: contact)));
-              // },
-            );
-          },
-        ).toList(),
-      ),
+    return ListView(
+      children: contacts.map(
+        (contact) {
+          return ListTile(
+            title: Text(
+              contact.title,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            subtitle: Text(contact.subtitle),
+            ////we set a void selectedCallback to be able to called from another widget
+            onTap: () => itemSelectedCallback(contact),
+            ////below commented code is for a normal page navigation
+            // onTap: () {
+            //   print("ListTile ${contact.title} tapped");
+            //   Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //           builder: (_) => ContactDetails(contact: contact)));
+            // },
+          );
+        },
+      ).toList(),
     );
   }
 }

@@ -4,65 +4,79 @@ import 'package:tablet/contactDetails.dart';
 import 'package:tablet/contact_listing.dart';
 
 class MasterDetailContainer extends StatefulWidget {
-  
   @override
-  _MasterDetailContainerState createState() =>
-      _MasterDetailContainerState();
+  _MasterDetailContainerState createState() => _MasterDetailContainerState();
 }
 
 class _MasterDetailContainerState extends State<MasterDetailContainer> {
-  // Track the currently selected item here. Only used for
-  // tablet layouts.
   Contact _selectedItem;
 
+////Here we build 2 different widget layout: mobile and tablet
   Widget _buildMobileLayout() {
-    return ContactScreen(
-      // Since we're on mobile, just push a new route for the
-      // item details.
-      itemSelectedCallback: (item) {
-        Navigator.push(...);
-      },
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        title: Text("Mobile Mode"),
+      ),
+      body: ContactList(
+        itemSelectedCallback: (contact) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ContactDetails(
+                        contact: contact,
+                      )));
+        },
+      ),
     );
   }
 
   Widget _buildTabletLayout() {
-    // For tablets, return a layout that has item listing on the left
-    // and item details on the right.
-    return Row(
-      children: <Widget>[
-        Flexible(
-          flex: 1, 
-          child: ContactScreen(
-            // Instead of pushing a new route here, we update
-            // the currently selected item, which is a part of
-            // our state now.
-            itemSelectedCallback: (item) {
-              setState(() {
-                _selectedItem = item;
-              });
-            },
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.cyan,
+        title: Text('Tablet Mode'),
+      ),
+      body: Row(
+        children: <Widget>[
+          Flexible(
+            flex: 1,
+            child: ContactList(
+              itemSelectedCallback: (contact) {
+                setState(() {
+                  _selectedItem = contact;
+                });
+              },
+            ),
           ),
-        ),
-        Flexible(
-          flex: 3,
-          child: ContactDetails(
-            // The item details just blindly accepts whichever
-            // item we throw in its way, just like before.
-           contact: _selectedItem,
+          Container(
+            color: Colors.cyan,
+            width: 2,
           ),
-        ),
-      ],
+          Flexible(
+            flex: 3,
+            child: ContactDetails(
+              contact: _selectedItem,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   @override
+  Widget build(BuildContext context) {
+    ////regardless of the orientation, it will always look for the shortest side of the device
+    //var shortestSide = MediaQuery.of(context).size.shortestSide;
 
-  
-  Widget build(BuildContext context) {    
-  var shortestSide = MediaQuery.of(context).size.shortestSide;
-  var useMobileLayout = shortestSide < 600;
+    ///usee mobile layout if shortest side is smaller than 600
+    // var useMobileLayout = shortestSide < 600;
 
-    if (useMobileLayout) {
+    //////the commented code below will look for the shortest width whether landscape or portrait
+    var shortestSide = MediaQuery.of(context).size.width;
+
+    //change 600 to 810 to test on Ipad and change orientation to see the different modes trigger
+    if (shortestSide < 600) {
       return _buildMobileLayout();
     }
 

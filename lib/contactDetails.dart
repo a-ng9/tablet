@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:tablet/contact.dart';
 
-class ContactDetails extends StatelessWidget {
+class ContactDetails extends StatefulWidget {
   final Contact contact;
 
   ContactDetails({@required this.contact});
+
+  @override
+  _ContactDetailsState createState() => _ContactDetailsState();
+}
+
+class _ContactDetailsState extends State<ContactDetails> {
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
@@ -12,21 +18,17 @@ class ContactDetails extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          contact?.title ?? 'No contact selected!',
+          widget.contact?.title ?? 'No contact selected!',
           style: textTheme.headline1,
+          textAlign: TextAlign.center,
         ),
         Text(
-          contact?.subtitle ?? 'Please select on on the left',
+          widget.contact?.subtitle ?? '',
           style: textTheme.subtitle1,
         ),
       ],
     );
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Contact info'),
-      ),
-      body: Center(child: content),
-    );
+    return Center(child: content);
   }
 }
