@@ -77,7 +77,7 @@ class _MasterDetailContainerState extends State<MasterDetailContainer> {
 
     //change 600 to 820 to test on Ipad and change orientation to see the different modes trigger
     //if you do change, you need to change in 'contactDetails' as well
-    if (shortestSide < 820) {
+    if (shortestSide < 600) {
       return _buildMobileLayout();
     }
 
