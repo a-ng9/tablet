@@ -75,8 +75,8 @@ class _MasterDetailContainerState extends State<MasterDetailContainer> {
     //////the commented code below will look for the shortest width whether landscape or portrait
     var shortestSide = MediaQuery.of(context).size.width;
 
-    //change 600 to 810 to test on Ipad and change orientation to see the different modes trigger
-    if (shortestSide < 600) {
+    //change 600 to 820 to test on Ipad and change orientation to see the different modes trigger
+    if (shortestSide < 820) {
       return _buildMobileLayout();
     }
 
