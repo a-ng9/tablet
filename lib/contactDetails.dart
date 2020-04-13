@@ -28,18 +28,18 @@ class _ContactDetailsState extends State<ContactDetails> {
         ),
       ],
     );
-
+    /////below code removes the appbar for the contact detail in TABLET modes
     var shortestSide = MediaQuery.of(context).size.width;
 
-    //change 600 to 820 to test on Ipad and change orientation to see the different modes trigger
-    if (shortestSide < 820) {
+    /////change 600 to 820 to test on Ipad and change orientation to see the different modes trigger
+    /////if you do change the number, dont forget to change in 'master_detail_container.dart'
+    if (shortestSide < 600) {
       return Scaffold(
           appBar: AppBar(
             title: Text('Contact Details'),
           ),
           body: Center(child: content));
-    }
-
-    return Center(child: content);
+    } else
+      return Center(child: content);
   }
 }

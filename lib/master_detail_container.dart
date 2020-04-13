@@ -76,6 +76,7 @@ class _MasterDetailContainerState extends State<MasterDetailContainer> {
     var shortestSide = MediaQuery.of(context).size.width;
 
     //change 600 to 820 to test on Ipad and change orientation to see the different modes trigger
+    //if you do change, you need to change in 'contactDetails' as well
     if (shortestSide < 820) {
       return _buildMobileLayout();
     }
